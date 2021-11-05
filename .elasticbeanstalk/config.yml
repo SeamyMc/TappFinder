@@ -1,0 +1,19 @@
+branch-defaults:
+  main:
+    environment: Helloworld-env-1
+environment-defaults:
+  Helloworld-env-1:
+    branch: null
+    repository: null
+global:
+  application_name: HelloWorld
+  default_ec2_keyname: tappfinder-prod
+  default_platform: PHP 8.0 running on 64bit Amazon Linux 2
+  default_region: eu-west-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: eb-cli
+  sc: git
+  workspace_type: Application
