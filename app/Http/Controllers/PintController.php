@@ -29,7 +29,11 @@ class PintController extends Controller
 
     public function resolveRequiredStores(Request $request)
     {
-        //If 
+        //If tap doesnt exist in table
+            //Then add the tap
+
+        //Either way, add the pint instance to the pints table
+        
     }
 
     /**

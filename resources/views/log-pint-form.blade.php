@@ -44,8 +44,6 @@
 					<button type="Submit" class="btn btn-outline-primary">Submit</button>
 				</div>
 			</div>
-
-			<p> Github test</p>
 		</div>
 	</form>
 	<br>
