@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Cache;
 use App\Models\Beer;
 use App\Models\Pub;
 use App\Models\Tap;
@@ -13,11 +14,16 @@ class SearchController extends Controller
 	private function getResolvers() {
 		return [	
 			'taps' => function ($searchQ, $cityQ) {
-				$beerIds = Beer::where('name','LIKE',"$searchQ%")->pluck('id');
-
-				$pubs = Pub::whereHas('taps', function (Builder $dbquery) use ($beerIds){
-    				$dbquery->whereIn('beer_id', $beerIds);
-				})->where('city','LIKE',"$cityQ%")->get();
+	
+				$pubs = Cache::remember($searchQ."in".$cityQ, 5, function() use ($searchQ, $cityQ){
+					$beerIds = Beer::where('name','LIKE',"$searchQ%")->pluck('id');
+					$pubs = Pub::whereHas('taps', function (Builder $dbquery) use ($beerIds){
+						$dbquery->whereIn('beer_id', $beerIds);
+					})->where('city','LIKE',"$cityQ%")->get();
+					return $pubs;
+				});
+		
+				
 				return $pubs;
 			},
 			'pubs' => function ($searchQ, $cityQ) {
