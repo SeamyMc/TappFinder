@@ -17,13 +17,9 @@ class TapController extends Controller
         //
     }
 
-    public function checkExists($beer_id, $pub_id)
-    {
-        $tapIds = Tap::all()->pluck('beer_id', 'pub_id');
+    public function checkExists($beerId, $pubId){
 
-        if ta
-        
-        return $tapIds->contains($beer_i);
+        return Tap::where('beer_id', $beerId)->where('pub_id', $pubId)->count() > 0;
     }
 
 

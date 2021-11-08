@@ -12,7 +12,7 @@ class Tap extends Model
     use HasFactory;
 
 	function beer(){
-    	return $this->hasOne(Beer::class);
+    	return $this->belongsTo(Beer::class);
     }
 
 	function pub(){

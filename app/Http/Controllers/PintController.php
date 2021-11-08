@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pint;
 use Illuminate\Http\Request;
+use App\Http\Controllers\TapController;
 
 class PintController extends Controller
 {
@@ -24,7 +25,7 @@ class PintController extends Controller
      */
     public function create()
     {
-        return view('log-pint');
+        return view('pints.create');
     }
 
     public function resolveRequiredStores(Request $request)
@@ -44,7 +45,7 @@ class PintController extends Controller
      */
     public function store(Request $request)
     {
-       // $pint = Pint::create($request);
+        
         return redirect()->route('home');
     }
 

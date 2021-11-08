@@ -7,6 +7,7 @@ use App\Models\Tap;
 use App\Models\Beer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BeerController;
+use App\Http\Resources\PubResource;
 
 class PubController extends Controller
 {
@@ -18,6 +19,11 @@ class PubController extends Controller
     public function index()
     {
         //
+    }
+
+    public function getPubs()
+    {
+        return PubResource::collection(Pub::all());
     }
 
     /**
@@ -58,13 +64,10 @@ class PubController extends Controller
         return Pub::findOrFail($id);
     }
 
-    public function show($id)
+    public function show(Pub $pub)
     { 
-        $category = "pub";
-        $pub = Pub::findOrFail($id);
-        $taps = Tap::where('pub_id', "$pub->id")->pluck('beer_id')->toArray();
-        $beers = Beer::WhereIn('id', array_keys($taps))->get();
-        return view('info', ['pub' => $pub, 'beers' => $beers, 'category' => 'pub']);
+
+        return view('info', ['pub' => $pub, 'category' => 'pub']);
     }
 
     /**

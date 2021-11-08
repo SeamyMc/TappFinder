@@ -27,10 +27,8 @@
 
 		<div class="row">
 			<div class="text-center col col-10 offset-1">
-				<form action="{{route('pints.create')}}" method="POST">
-					@csrf
-						<button type="submit" class="text-center btn btn-outline-secondary">Just had a pint? Tell us about it here!</button>
-				</form>
+	
+				<a href="{{route('pints.create')}}" type="submit" class="text-center btn btn-outline-secondary">Just had a pint? Tell us about it here!</a>
 			</div>
 		</div>
 

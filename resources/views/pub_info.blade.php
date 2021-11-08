@@ -30,9 +30,9 @@
 
 		<ul class="list-group">
 
-			@foreach ($beers as $beer)
-			<a style="all:unset; cursor:pointer" href="{{route('beer.show', $item->id)}}">
-				<li class="list-group-item"> {{$beer->name}} {{$beer->abv}}% <!-- {{$prices[$beer->id]}} -->  </li>
+			@foreach ($pub->taps as $tap)
+			<a style="all:unset; cursor:pointer" href="{{ route('beer.show', $tap->beer) }}">
+				<li class="list-group-item"> {{$tap->beer->name}} {{$tap->beer->abv}}% </li>
 			</a>
 			@endforeach
 			

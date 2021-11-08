@@ -5,6 +5,8 @@ use App\Http\Controllers\BeerController;
 use App\Http\Controllers\PubController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\PintController;
+use App\Http\Controllers\TapController;
+use \Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,12 +47,15 @@ Route::get('/contact', function (){
 
 Route::get('/pub/{pub}', [PubController::class, 'show'])->name('pub.show');
 Route::get('/beer/{beer}', [BeerController::class, 'show'])->name('beer.show');
-Route::post('/pints/add', [PintController::class, 'create'])->name('pints.create');
+Route::get('/pints/create', [PintController::class, 'create'])->name('pints.create');
 Route::post('/pints/store', [PintController::class, 'store'])->name('pints.store');
 
 //Search Routes
 
 Route::get('/search', [SearchController::class, 'search']);
 
+
+//Test Routes
+Route::get('/checkexists/{pubId}/{beerId}', [TapController::class, 'checkExists']);
 
 require __DIR__.'/auth.php';
