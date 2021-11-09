@@ -20,15 +20,15 @@
 		<div class="row">
 			@foreach ($items as $item)
 				@if ($criteria == "beers")
-					@include ('w-beer-search-card')
+					@include ('widgets.beer-card')
 				@endif
 
 				@if ($criteria == "pubs" or $criteria == "taps")
-					@include ('w-pub-search-card')
+					@include ('widgets.pub-card')
 				@endif
 			@endforeach
 
-			@include('add-item-card')
+			@include('widgets.add-item-card')
 		</div>
 	</div>
 </div>

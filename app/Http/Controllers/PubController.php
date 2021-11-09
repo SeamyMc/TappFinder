@@ -67,7 +67,7 @@ class PubController extends Controller
     public function show(Pub $pub)
     { 
 
-        return view('info', ['pub' => $pub, 'category' => 'pub']);
+        return view('pubs.show', ['pub' => $pub, 'category' => 'pub']);
     }
 
     /**

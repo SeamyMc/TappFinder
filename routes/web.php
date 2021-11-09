@@ -31,15 +31,15 @@ Route::get('/dashboard', function () {
 
 
 Route::get('/home', function (){
-	return view('base');
+	return view('home.home');
 })->name('home');
 
 Route::get('/about', function (){
-	return view('about');
+	return view('about.about');
 });
 
 Route::get('/contact', function (){
-	return view('contact');
+	return view('contact.contact');
 });
 
 

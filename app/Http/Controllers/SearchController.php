@@ -58,7 +58,7 @@ class SearchController extends Controller
 		$cityQ = $request->input('cityQ');
 		$items = $this->resolveItems($criteria, $searchQ, $cityQ);
 
-		return view('search', compact('items', 'criteria', 'searchQ', 'cityQ'));
+		return view('search.search', compact('items', 'criteria', 'searchQ', 'cityQ'));
 	}
 
 }

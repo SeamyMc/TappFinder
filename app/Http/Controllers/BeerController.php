@@ -48,7 +48,7 @@ class BeerController extends Controller
      */
     public function show($id)
     {
-        return view('info', ['beer' => Beer::findOrFail($id), 'category' => 'beer']);
+        return view('beers.show', ['beer' => Beer::findOrFail($id), 'category' => 'beer']);
     }
 
     public function getBeers($query)

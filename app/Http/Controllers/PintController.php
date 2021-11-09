@@ -48,7 +48,7 @@ class PintController extends Controller
         
         return redirect()->route('home');
     }
-
+    
     /**
      * Display the specified resource.
      *
