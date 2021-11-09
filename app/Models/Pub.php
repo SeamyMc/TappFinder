@@ -12,6 +12,7 @@ class Pub extends Model
 {
     use HasFactory;
 
+
     function beers(){
 		return $this->hasManyThrough(Beer::class, Tap::class);
     }

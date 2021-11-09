@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pint;
+use App\Models\Tap;
 use Illuminate\Http\Request;
+use App\Http\Controllers\TapController;
+use Illuminate\Support\Facades\Auth;
 
 class PintController extends Controller
 {
@@ -24,12 +27,16 @@ class PintController extends Controller
      */
     public function create()
     {
-        return view('log-pint');
+        return view('pints.create');
     }
 
     public function resolveRequiredStores(Request $request)
     {
-        //If 
+        //If tap doesnt exist in table
+            //Then add the tap
+
+        //Either way, add the pint instance to the pints table
+        
     }
 
     /**
@@ -40,10 +47,23 @@ class PintController extends Controller
      */
     public function store(Request $request)
     {
-       // $pint = Pint::create($request);
-        return redirect()->route('home');
-    }
+        $tap = Tap::firstOrCreate(
+            ['beer_id' => $request->beer, 
+             'pub_id' => $request->pub]
+        );
 
+        $user = Auth::user();
+
+        $pint = $tap->pint()->create([
+            "user_id" => $user->id,
+            "price" => $request->price*100, 
+            "rating" => $request->rating]);
+
+
+        
+        return $pint;
+    }
+    
     /**
      * Display the specified resource.
      *

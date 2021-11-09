@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PubController;
+use App\Http\Controllers\BeerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/pubs', [PubController::class, 'getPubs'])->name('api.pubs.index');
+Route::get('/beers', [BeerController::class, 'apiIndex'])->name('api.beers.index');
