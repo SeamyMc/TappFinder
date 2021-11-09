@@ -32,7 +32,7 @@ class BeerController extends Controller
      */
     public function create()
     {
-        //
+        return view('beers.create');
     }
 
 
@@ -44,7 +44,15 @@ class BeerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $beer = Beer::firstOrCreate(
+            ['name' => $request->name],
+            ['abv' => $request->abv,
+             'description' => $request->description, 
+             'brewery' => $request->brewery, 
+             'image'=>$request->image]
+        );
+
+        return redirect()->route('beer.show', ['beer' => $beer->id]);
     }
 
     /**
