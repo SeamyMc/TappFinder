@@ -18,7 +18,7 @@ class SearchController extends Controller
 					$beerIds = Beer::where('name','LIKE',"$searchQ%")->pluck('id');
 					$pubs = Pub::whereHas('taps', function (Builder $dbquery) use ($beerIds){
 						$dbquery->whereIn('beer_id', $beerIds);
-					})->where('city','LIKE',"$cityQ%")->get();
+					})->where('city','LIKE',"$cityQ%")->orderBy('name')->get();
 					return $pubs;
 				});
 		
@@ -28,14 +28,14 @@ class SearchController extends Controller
 			'pubs' => function ($searchQ, $cityQ) {
 
 					$pubs = Cache::remember("Pubs:".$searchQ."in".$cityQ, 30, function() use ($searchQ, $cityQ){
-						return Pub::where('name','LIKE',"$searchQ%")->where('city','LIKE',"$cityQ%")->get();
+						return Pub::where('name','LIKE',"$searchQ%")->where('city','LIKE',"$cityQ%")->orderBy('name')->get();
 					});
 
 				return $pubs;
 			},
 			'beers' => function ($searchQ) {
 				$beers = Cache::remember("Beers:".$searchQ, 30, function() use ($searchQ){
-					return Beer::where('name','LIKE',"$searchQ%")->withCount('taps')->get();
+					return Beer::where('name','LIKE',"$searchQ%")->withCount('taps')->orderByDesc('taps_count')->get();
 				});
 				return $beers;
 			}

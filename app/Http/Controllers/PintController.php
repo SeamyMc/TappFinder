@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pint;
+use App\Models\Tap;
 use Illuminate\Http\Request;
 use App\Http\Controllers\TapController;
+use Illuminate\Support\Facades\Auth;
 
 class PintController extends Controller
 {
@@ -45,8 +47,21 @@ class PintController extends Controller
      */
     public function store(Request $request)
     {
+        $tap = Tap::firstOrCreate(
+            ['beer_id' => $request->beer, 
+             'pub_id' => $request->pub]
+        );
+
+        $user = Auth::user();
+
+        $pint = $tap->pint()->create([
+            "user_id" => $user->id,
+            "price" => $request->price*100, 
+            "rating" => $request->rating]);
+
+
         
-        return redirect()->route('home');
+        return $pint;
     }
     
     /**

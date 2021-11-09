@@ -15,15 +15,17 @@
 				<div class="row">
 					<div class="col">
 						<label for="inputPub" class="form-label">What pub did you visit? (@{{ pubs.length }})</label>
-						<select v-model="pub" class="form-select" aria-label="Default select example">
+						<select name="pub" v-model="pub" class="form-select" aria-label="Default select example">
 							<option v-for="pub in pubs" :value="pub.id">@{{pub.name}}</option>
 						</select>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col">
-						<label for="inputBeer" class="form-label">What pint did you have?</label>
-						<input name="beer" type="text" id="inputBeer" class="form-control" placeholder="Pint">	
+						<label for="inputBeer" class="form-label">What pint did you have? (@{{ beers.length }})</label>
+						<select name="beer" v-model="beer" class="form-select" aria-label="Default select example">
+							<option v-for="beer in beers" :value="beer.id">@{{beer.name}}</option>
+						</select>
 					</div>
 				</div>
 				<div class="row">
@@ -62,18 +64,25 @@
 			data() {
 				return {
 					pub : null, 
-					pubs : []
+					pubs : [],
+					beer: null,
+					beers: []
 				}
 			},
 
 			methods: {
 				loadPubs(){
 					axios.get('/api/pubs').then(response => this.pubs = response.data.data);
+				},
+
+				loadBeers(){
+					axios.get('/api/beers').then(response => this.beers = response.data.data);
 				}
 			},
 
 			mounted() {
 				this.loadPubs();
+				this.loadBeers();
 			}
 		})
 

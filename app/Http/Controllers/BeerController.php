@@ -6,6 +6,7 @@ use App\Models\Beer;
 use App\Models\Tap;
 use App\Models\Pub;
 use Illuminate\Http\Request;
+use App\Http\Resources\BeerResource;
 
 class BeerController extends Controller
 {
@@ -19,6 +20,11 @@ class BeerController extends Controller
         //
     }
 
+    public function apiIndex()
+    {
+        return BeerResource::collection(Beer::all());
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -28,6 +34,7 @@ class BeerController extends Controller
     {
         //
     }
+
 
     /**
      * Store a newly created resource in storage.
