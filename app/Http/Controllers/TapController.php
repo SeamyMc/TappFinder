@@ -17,6 +17,12 @@ class TapController extends Controller
         //
     }
 
+    public function checkExists($beerId, $pubId){
+
+        return Tap::where('beer_id', $beerId)->where('pub_id', $pubId)->count() > 0;
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
