@@ -61,7 +61,7 @@ class PintController extends Controller
 
 
         
-        return $pint;
+        return redirect()->route('home');
     }
     
     /**

@@ -47,8 +47,14 @@ Route::get('/contact', function (){
 
 Route::get('/pub/{pub}', [PubController::class, 'show'])->name('pub.show');
 Route::get('/beer/{beer}', [BeerController::class, 'show'])->name('beer.show');
+
+//Insert Routes
+
 Route::get('/pints/create', [PintController::class, 'create'])->name('pints.create');
 Route::post('/pints/store', [PintController::class, 'store'])->name('pints.store');
+
+Route::get('/beers/create', [BeerController::class, 'create'])->name('beers.create');
+Route::post('/beers/store', [BeerController::class, 'store'])->name('beers.store');
 
 //Search Routes
 
@@ -56,6 +62,6 @@ Route::get('/search', [SearchController::class, 'search']);
 
 
 //Test Routes
-Route::get('/checkexists/{pubId}/{beerId}', [TapController::class, 'checkExists']);
+//Route::get('/checkexists/{pubId}/{beerId}', [TapController::class, 'checkExists']);
 
 require __DIR__.'/auth.php';
