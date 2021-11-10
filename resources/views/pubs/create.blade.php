@@ -19,7 +19,7 @@
 
 				<div class="row">
 					<div class="col">
-						<label for="inputChain" class="form-label">Which chain is it owned by? (Leave blank for independent)</label>
+						<label for="inputChain" class="form-label">Which chain is it owned by? (Leave blank if independent)</label>
 						<input name="chain" type="text" id="inputChain" class="form-control" placeholder="Chain">	
 					</div>
 				</div>
