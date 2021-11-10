@@ -44,7 +44,16 @@ class PubController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pub = Pub::firstOrCreate(
+            ['name' => $request->name],
+            ['chain' => $request->chain,
+             'description' => $request->description, 
+             'add1' => $request->add1,
+             'add2' => $request->add2,
+             'postcode' => $request->postcode,
+             'city' => $request->city, 
+             'image'=>$request->image]
+        );
     }
 
     public function getServedBeers()

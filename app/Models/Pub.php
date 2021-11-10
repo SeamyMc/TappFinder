@@ -12,6 +12,9 @@ class Pub extends Model
 {
     use HasFactory;
 
+	protected $fillable = ['name', 'chain', 
+	'description', 'add1', 'add2', 'postcode', 'city', 'image'];
+
 
     function beers(){
 		return $this->hasManyThrough(Beer::class, Tap::class);
