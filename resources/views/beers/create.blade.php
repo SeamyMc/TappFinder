@@ -5,7 +5,7 @@
 	<div id="beer-create-form" class="row bg-light my-3 pt-3">
 		<form action="{{route('beers.store')}}" method="POST">
 			@csrf
-			<div class="col-6 offset-3">		
+			<div class="col-md-6 offset-md-3">		
 				<h3> Add a Beer: </h3>
 				<div class="row">
 					<div class="col">

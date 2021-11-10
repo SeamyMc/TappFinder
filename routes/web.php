@@ -56,6 +56,9 @@ Route::post('/pints/store', [PintController::class, 'store'])->name('pints.store
 Route::get('/beers/create', [BeerController::class, 'create'])->name('beers.create');
 Route::post('/beers/store', [BeerController::class, 'store'])->name('beers.store');
 
+Route::get('/pubs/create', [PubController::class, 'create'])->name('pubs.create');
+Route::post('/pubs/store', [PubController::class, 'store'])->name('pubs.store');
+
 //Search Routes
 
 Route::get('/search', [SearchController::class, 'search']);

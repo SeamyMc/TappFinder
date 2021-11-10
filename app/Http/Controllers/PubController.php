@@ -33,7 +33,7 @@ class PubController extends Controller
      */
     public function create()
     {
-        //
+        return view('pubs.create');
     }
 
     /**

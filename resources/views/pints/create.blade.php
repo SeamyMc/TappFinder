@@ -5,7 +5,7 @@
 	<div id="pint-create-form" class="row bg-light my-3 pt-3">
 		<form action="{{route('pints.store')}}" method="POST">
 			@csrf
-			<div class="col-6 offset-3">
+			<div class="col-md-6 offset-md-3">
 				<div class="row">
 					<div class="col">
 						<label for="inputCity" class="form-label">Where are you?</label>
