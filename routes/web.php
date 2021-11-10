@@ -21,6 +21,11 @@ use \Illuminate\Http\Request;
 
 //Basic Routes
 
+if (app()->environment('local'))
+	Route::get('phpinfo', function () {
+		phpinfo();
+	});
+
 Route::get('/', function () {
    return redirect('home');
 });
