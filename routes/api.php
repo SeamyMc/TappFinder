@@ -22,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/pubs', [PubController::class, 'getPubs'])->name('api.pubs.index');
 Route::get('/beers', [BeerController::class, 'apiIndex'])->name('api.beers.index');
+Route::get('/pubs/pubsnear/', [PubController::class, 'getPubsNear'])->name('api.pubs.near');

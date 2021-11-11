@@ -47,21 +47,21 @@ class PintController extends Controller
      */
     public function store(Request $request)
     {
+
+        $user = Auth::user();
+
         $tap = Tap::firstOrCreate(
             ['beer_id' => $request->beer, 
              'pub_id' => $request->pub]
         );
-
-        $user = Auth::user();
 
         $pint = $tap->pint()->create([
             "user_id" => $user->id,
             "price" => $request->price*100, 
             "rating" => $request->rating]);
 
-
-        
         return redirect()->route('home');
+        
     }
     
     /**

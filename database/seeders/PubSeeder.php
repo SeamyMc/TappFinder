@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Pub;
 use Faker\Generator;
+use GuzzleHttp\Client;
+use App\Http\Controllers\PubController;
 
 
 class PubSeeder extends Seeder
@@ -14,22 +16,14 @@ class PubSeeder extends Seeder
      *
      * @return void
      */
+
+
     public function run(Generator $faker)
     {
-  
+      	$pubController = new PubController();
   		Pub::truncate();
-		for ($i=0; $i<50; $i++){
-			// Pub::create([
-			//     'name' => $faker->word(),
-			//     'chain' =>  $faker->sentence(),
-			//     'description' =>  $faker->sentence(),
-			//     'image' => 'https://placebear.com/200/300',
-			//     'add1' =>  $faker->sentence(),
-			//     'add2' =>  $faker->sentence(),
-			//     'city' =>  $faker->city(),
-			//     'postcode' =>  $faker->sentence(),		    
-		 //    ]);	
-		}
+		
+		$coords = $pubController->getCoords("CF10 3BX");
 		Pub::create([
 		    'name' => 'Flute and Tankard',
 		    'chain' =>  'Independent',
@@ -38,9 +32,12 @@ class PubSeeder extends Seeder
 		    'add1' =>  '4 Windsor Place',
 		    'add2' =>  '',
 		    'city' =>  'Cardiff',
-		    'postcode' =>  'CF10 3BX',		    
+		    'postcode' =>  'CF10 3BX',
+		    'lat' => $coords[0],
+		    'long' => $coords[1]	    
 	    ]);		
 
+		$coords = $pubController->getCoords("CF24 4NN");
 	    Pub::create([
 		    'name' => 'Crwys',
 		    'chain' =>  'Brains',
@@ -49,9 +46,13 @@ class PubSeeder extends Seeder
 		    'add1' =>  '34 Crwys Road',
 		    'add2' =>  '',
 		    'city' =>  'Cardiff',
-		    'postcode' =>  'CF24 4NN',		    
+		    'postcode' =>  'CF24 4NN',
+		    'lat' => $coords[0],
+		    'long' => $coords[1]	 		    
 	    ]);
 
+
+		$coords = $pubController->getCoords("BT78 1DW");
 	    Pub::create([
 		    'name' => 'Top of The Town',
 		    'chain' =>  'Independent',
@@ -60,9 +61,14 @@ class PubSeeder extends Seeder
 		    'add1' =>  '13 John Street',
 		    'add2' =>  '',
 		    'city' =>  'Omagh',
-		    'postcode' =>  'BT78 1DW',		    
+		    'postcode' =>  'BT78 1DW',
+		    'lat' => $coords[0],
+		    'long' => $coords[1]			    
 	    ]);	
 
+
+
+		$coords = $pubController->getCoords("NP20 1DL");
 	    Pub::create([
 		    'name' => 'The Potters',
 		    'chain' =>  'Independent',
@@ -71,7 +77,9 @@ class PubSeeder extends Seeder
 		    'add1' =>  '22-24 Upper Dock Street',
 		    'add2' =>  '',
 		    'city' =>  'Newport',
-		    'postcode' =>  'NP20 1DL',		    
+		    'postcode' =>  'NP20 1DL',
+		    'lat' => $coords[0],
+		    'long' => $coords[1]		    
 	    ]);		
     	
     }

@@ -41,7 +41,7 @@ class BeersPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**

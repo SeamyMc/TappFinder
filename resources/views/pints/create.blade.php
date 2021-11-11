@@ -66,7 +66,9 @@
 					pub : null, 
 					pubs : [],
 					beer: null,
-					beers: []
+					beers: [],
+					coords: [],
+					locationtest: null
 				}
 			},
 
@@ -77,12 +79,33 @@
 
 				loadBeers(){
 					axios.get('/api/beers').then(response => this.beers = response.data.data);
+				},
+
+				async loadPubsNear() {		
+					await axios.get('/api/pubs/pubsnear', {
+						params: {
+							lat: Number(localStorage.getItem('lat')),
+							long: Number(localStorage.getItem('long'))
+						}
+					}).then(response => this.pubs = response.data).catch((error) => {
+	  					console.error(error);
+	  				})
+				}
+			},
+
+			watch: {
+				'pubs' : function(){
+					this.loadPubsNear();
 				}
 			},
 
 			mounted() {
 				this.loadPubs();
 				this.loadBeers();
+				//this.loadPubsNear();
+
+
+
 			}
 		})
 
