@@ -7,6 +7,12 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\PintController;
 use App\Http\Controllers\TapController;
 use \Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Beer;
+use App\Models\Pint;
+use App\Models\Pub;
+use App\Mail\Emailer;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +53,13 @@ Route::get('/contact', function (){
 	return view('contact.contact');
 });
 
+Route::get('/mail12345', function() {
+	$beer = Beer::first();
+	$user = User::first();
+	Mail::to(User::first())->send(new Emailer($beer, $user));
+
+});
+
 
 //Show Routes
 
@@ -55,14 +68,15 @@ Route::get('/beer/{beer}', [BeerController::class, 'show'])->name('beer.show');
 
 //Insert Routes
 
-Route::get('/pints/create', [PintController::class, 'create'])->name('pints.create');
-Route::post('/pints/store', [PintController::class, 'store'])->name('pints.store');
+Route::middleware('can:create,' . Pint::class)->get('/pints/create', [PintController::class, 'create'])->name('pints.create');
 
-Route::get('/beers/create', [BeerController::class, 'create'])->name('beers.create');
-Route::post('/beers/store', [BeerController::class, 'store'])->name('beers.store');
+Route::middleware('can:create,' . Pint::class)->get('/pints/store', [PintController::class, 'store'])->name('pints.store');
 
-Route::get('/pubs/create', [PubController::class, 'create'])->name('pubs.create');
-Route::post('/pubs/store', [PubController::class, 'store'])->name('pubs.store');
+Route::middleware('can:create,' . Beer::class)->get('/beers/create', [BeerController::class, 'create'])->name('beers.create');
+Route::middleware('can:create,' . Beer::class)->get('/beers/store', [BeerController::class, 'store'])->name('beers.store');
+
+Route::middleware('can:create,' . Pub::class)->get('/pubs/create', [PubController::class, 'create'])->name('pubs.create');
+Route::middleware('can:create,' . Pub::class)->get('/pubs/store', [PubController::class, 'store'])->name('pubs.store');
 
 //Search Routes
 

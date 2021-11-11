@@ -30,7 +30,7 @@
 		</div>
 		<div class="row">
 			@if ($criteria == "taps")
-				<p class="fs-5"> Can't find what you're looking for? <a href='route("pints.create")'> Click here</a> to tell us about a pint you had!
+				<p class="fs-5"> Can't find what you're looking for? <a href='{{route("pints.create")}}'> Click here</a> to tell us about a pint you had!
 				</p>
 			@else
 				<p class="fs-5"> Can't find what you're looking for? <a href='{{route("$criteria.create")}}'> Click here</a> to add to our list of {{$criteria}}!
