@@ -24,7 +24,7 @@ class Pub extends Model
     	return $this->hasMany(Tap::class);
     }
 
-   public function scopeForPubsNear($query, $lat, $lon, $radius = 1) {
+   public function scopeForPubsNear($query, $lat, $lon, $radius = 50) {
 
      $haversine = "(6371 * acos(cos(radians($lat)) 
                      * cos(radians(pubs.lat)) 

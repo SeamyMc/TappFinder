@@ -36,27 +36,15 @@
 
 <script type="text/javascript">
 		
-		var createPintApp = new Vue({
+		var homeApp = new Vue({
 			el: '#home-app',
 			data() {
 				return {
-					pub : null, 
-					pubs : [],
-					beer: null,
-					beers: [],
-					coords: [],
-					locationtest: null
+
 				}
 			},
 
 			methods: {
-				loadPubs(){
-					axios.get('/api/pubs').then(response => this.pubs = response.data.data);
-				},
-
-				loadBeers(){
-					axios.get('/api/beers').then(response => this.beers = response.data.data);
-				},
 
 				getLocation() {
 				  if (navigator.geolocation) {
@@ -65,23 +53,13 @@
 				},
 
 				storePosition(position) {
-				 	this.coords = [position.coords.latitude, position.coords.longitude];
-				 	this.pingLocation();
-				},
+				 	localStorage.setItem("lat", position.coords.latitude);
+				 	localStorage.setItem("long", position.coords.longitude);
 
-				pingLocation() {
-					axios.get('/api/pubs/pubsnear', {
-						params: {
-							lat: this.coords[0],
-							long: this.coords[1]
-						}
-					}).then(response => this.locationtest = response.data.data);
 				}
 			},
 
 			mounted() {
-				this.loadPubs();
-				this.loadBeers();
 				this.getLocation();
 			}
 		})

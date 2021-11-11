@@ -22,7 +22,6 @@
 				</div>
 				<div class="row">
 					<div class="col">
-									<p>@{{locationtest}}</p>
 						<label for="inputBeer" class="form-label">What pint did you have? (@{{ beers.length }})</label>
 						<select name="beer" v-model="beer" class="form-select" aria-label="Default select example">
 							<option v-for="beer in beers" :value="beer.id">@{{beer.name}}</option>
@@ -82,31 +81,31 @@
 					axios.get('/api/beers').then(response => this.beers = response.data.data);
 				},
 
-				getLocation() {
-				  if (navigator.geolocation) {
-				  	navigator.geolocation.getCurrentPosition(this.storePosition);
-				  }
-				},
-
-				storePosition(position) {
-				 	this.coords = [position.coords.latitude, position.coords.longitude];
-				 	this.pingLocation();
-				},
-
-				pingLocation() {
-					axios.get('/api/pubs/pubsnear', {
+				async loadPubsNear() {		
+					await axios.get('/api/pubs/pubsnear', {
 						params: {
-							lat: this.coords[0],
-							long: this.coords[1]
+							lat: Number(localStorage.getItem('lat')),
+							long: Number(localStorage.getItem('long'))
 						}
-					}).then(response => this.locationtest = response.data.data);
+					}).then(response => this.pubs = response.data).catch((error) => {
+	  					console.error(error);
+	  				})
+				}
+			},
+
+			watch: {
+				'pubs' : function(){
+					this.loadPubsNear();
 				}
 			},
 
 			mounted() {
 				this.loadPubs();
 				this.loadBeers();
-				this.getLocation();
+				//this.loadPubsNear();
+
+
+
 			}
 		})
 
