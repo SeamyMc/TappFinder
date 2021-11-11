@@ -8,6 +8,7 @@ use App\Models\Beer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BeerController;
 use App\Http\Resources\PubResource;
+use GuzzleHttp\Client;
 
 class PubController extends Controller
 {
@@ -71,6 +72,19 @@ class PubController extends Controller
     public function getPub($id)
     {
         return Pub::findOrFail($id);
+    }
+
+    public function getCoords($postcode)
+    {
+
+        $client = new Client();
+        $response = $client->get('https://api.postcodes.io/postcodes/'.$postcode)->getBody()->getContents();
+        $data = json_decode($response, true)["result"];
+
+        $latitude = $data["latitude"];
+        $longitude = $data["longitude"];        
+
+        return [$latitude, $longitude];
     }
 
     public function show(Pub $pub)

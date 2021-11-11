@@ -82,6 +82,7 @@ Route::middleware('can:create,' . Pub::class)->get('/pubs/store', [PubController
 
 Route::get('/search', [SearchController::class, 'search']);
 
+Route::get('/pubs/pubsnear', [PubController::class, 'getPubsNear'])->name('pubs.near');
 
 //Test Routes
 //Route::get('/checkexists/{pubId}/{beerId}', [TapController::class, 'checkExists']);
