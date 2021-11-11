@@ -55,7 +55,7 @@ class BeerSeeder extends Seeder
 	    ]);	
 
 	    Beer::create([
-		    'name' => 'Tennants',
+		    'name' => 'Tennents',
 		    'brewery' =>  'Wellpark Brewery',
 		    'abv' =>  4.0,
 		    'image' => "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F736x%2Faf%2F13%2F96%2Faf139654d7fee3af558ea9b047bf8b28--beer-drinks.jpg&f=1&nofb=1",
@@ -92,8 +92,14 @@ class BeerSeeder extends Seeder
 		    'abv' =>  4.6,
 		    'image' => "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.92iQTB9MNVsHUPvplFUN4AHaE8%26pid%3DApi&f=1",
 		    'description' =>  "Lager",	    
-	    ]);	
+	    ]);
 
-
+	    Beer::create([
+		    'name' => 'Brains Smooth',
+		    'brewery' =>  'Brains',
+		    'abv' =>  4.2,
+		    'image' => "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.c4yy3pd2ONMyZwecYuiqKAHaO0%26pid%3DApi&f=1",
+		    'description' =>  "Ale",	    
+	    ]);
     }
 }

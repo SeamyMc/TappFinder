@@ -4,7 +4,7 @@
 	<br>
 	<br>
 	<br>
-	<div class="row">
+	<div id="appcontainer" class="row">
 		<div class="col">
 			<div class="row">
 				<div class="col-6 offset-3">
@@ -37,7 +37,7 @@
 <script type="text/javascript">
 		
 		var homeApp = new Vue({
-			el: '#home-app',
+			el: '#appcontainer',
 			data() {
 				return {
 
@@ -60,7 +60,12 @@
 			},
 
 			mounted() {
-				this.getLocation();
+				if (localStorage.getItem('lat') == null){
+					this.getLocation();
+				}
+
+				document.getElementById('lat').value = localStorage.getItem("lat");
+				document.getElementById('long').value = localStorage.getItem("long");
 			}
 		})
 

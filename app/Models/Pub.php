@@ -13,7 +13,7 @@ class Pub extends Model
     use HasFactory;
 
 	protected $fillable = ['name', 'chain', 
-	'description', 'add1', 'add2', 'postcode', 'city', 'image'];
+	'description', 'add1', 'add2', 'postcode', 'city', 'image', 'lat', 'long'];
 
 
     function beers(){
@@ -24,7 +24,7 @@ class Pub extends Model
     	return $this->hasMany(Tap::class);
     }
 
-   public function scopeForPubsNear($query, $lat, $lon, $radius = 50) {
+   public function scopeForPubsNear($query, $lat, $lon, $radius = 10) {
 
      $haversine = "(6371 * acos(cos(radians($lat)) 
                      * cos(radians(pubs.lat)) 
