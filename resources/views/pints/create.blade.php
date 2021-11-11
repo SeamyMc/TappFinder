@@ -22,6 +22,7 @@
 				</div>
 				<div class="row">
 					<div class="col">
+									<p>@{{locationtest}}</p>
 						<label for="inputBeer" class="form-label">What pint did you have? (@{{ beers.length }})</label>
 						<select name="beer" v-model="beer" class="form-select" aria-label="Default select example">
 							<option v-for="beer in beers" :value="beer.id">@{{beer.name}}</option>
@@ -66,7 +67,9 @@
 					pub : null, 
 					pubs : [],
 					beer: null,
-					beers: []
+					beers: [],
+					coords: [],
+					locationtest: null
 				}
 			},
 
@@ -77,12 +80,33 @@
 
 				loadBeers(){
 					axios.get('/api/beers').then(response => this.beers = response.data.data);
+				},
+
+				getLocation() {
+				  if (navigator.geolocation) {
+				  	navigator.geolocation.getCurrentPosition(this.storePosition);
+				  }
+				},
+
+				storePosition(position) {
+				 	this.coords = [position.coords.latitude, position.coords.longitude];
+				 	this.pingLocation();
+				},
+
+				pingLocation() {
+					axios.get('/api/pubs/pubsnear', {
+						params: {
+							lat: this.coords[0],
+							long: this.coords[1]
+						}
+					}).then(response => this.locationtest = response.data.data);
 				}
 			},
 
 			mounted() {
 				this.loadPubs();
 				this.loadBeers();
+				this.getLocation();
 			}
 		})
 

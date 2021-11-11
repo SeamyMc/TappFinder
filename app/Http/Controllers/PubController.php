@@ -87,9 +87,15 @@ class PubController extends Controller
         return [$latitude, $longitude];
     }
 
+    public function getPubsNear(Request $request){
+        $location = ["latitude" => $request->lat, "longitude" => $request->long];
+        $pubs = Pub::forPubsNear($request->lat, $request->long)->get();
+        
+        return $pubs;
+    }
+
     public function show(Pub $pub)
     { 
-
         return view('pubs.show', ['pub' => $pub, 'category' => 'pub']);
     }
 

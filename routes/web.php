@@ -70,19 +70,19 @@ Route::get('/beer/{beer}', [BeerController::class, 'show'])->name('beer.show');
 
 Route::middleware('can:create,' . Pint::class)->get('/pints/create', [PintController::class, 'create'])->name('pints.create');
 
-Route::middleware('can:create,' . Pint::class)->get('/pints/store', [PintController::class, 'store'])->name('pints.store');
+Route::middleware('can:create,' . Pint::class)->post('/pints/store', [PintController::class, 'store'])->name('pints.store');
 
 Route::middleware('can:create,' . Beer::class)->get('/beers/create', [BeerController::class, 'create'])->name('beers.create');
-Route::middleware('can:create,' . Beer::class)->get('/beers/store', [BeerController::class, 'store'])->name('beers.store');
+Route::middleware('can:create,' . Beer::class)->post('/beers/store', [BeerController::class, 'store'])->name('beers.store');
 
 Route::middleware('can:create,' . Pub::class)->get('/pubs/create', [PubController::class, 'create'])->name('pubs.create');
-Route::middleware('can:create,' . Pub::class)->get('/pubs/store', [PubController::class, 'store'])->name('pubs.store');
+Route::middleware('can:create,' . Pub::class)->post('/pubs/store', [PubController::class, 'store'])->name('pubs.store');
 
 //Search Routes
 
 Route::get('/search', [SearchController::class, 'search']);
 
-Route::get('/pubs/pubsnear', [PubController::class, 'getPubsNear'])->name('pubs.near');
+
 
 //Test Routes
 //Route::get('/checkexists/{pubId}/{beerId}', [TapController::class, 'checkExists']);
