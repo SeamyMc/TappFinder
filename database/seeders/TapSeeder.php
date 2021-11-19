@@ -37,10 +37,6 @@ class TapSeeder extends Seeder
                 'pub_id' => 2,
             ]);
             Tap::create([
-                'beer_id' => 8,
-                'pub_id' => 2,
-            ]);
-            Tap::create([
                 'beer_id' => 9,
                 'pub_id' => 2,
             ]);
