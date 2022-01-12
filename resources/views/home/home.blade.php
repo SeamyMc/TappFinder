@@ -63,9 +63,11 @@
 				if (localStorage.getItem('lat') == null){
 					this.getLocation();
 				}
-
 				document.getElementById('lat').value = localStorage.getItem("lat");
 				document.getElementById('long').value = localStorage.getItem("long");
+
+				
+
 			}
 		})
 
