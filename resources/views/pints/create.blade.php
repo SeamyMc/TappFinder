@@ -6,12 +6,7 @@
 		<form action="{{route('pints.store')}}" method="POST">
 			@csrf
 			<div class="col-md-6 offset-md-3">
-				<div class="row">
-					<div class="col">
-						<label for="inputCity" class="form-label">Where are you?</label>
-						<input name="city" type="text" id="inputCity" class="form-control" placeholder="City/Town">	
-					</div>
-				</div>
+	
 				<div class="row">
 					<div class="col">
 						<label for="inputPub" class="form-label">What pub did you visit? (@{{ pubs.length }})</label>
@@ -67,22 +62,24 @@
 					pubs : [],
 					beer: null,
 					beers: [],
-					coords: [],
-					locationtest: null
+					lat: Number(localStorage.getItem('lat')),
+					long: Number(localStorage.getItem('long'))
+
 				}
 			},
 
 			methods: {
 				loadPubs(){
 					axios.get('/api/pubs').then(response => this.pubs = response.data.data);
+					this.loadPubsNear();
 				},
 
 				loadBeers(){
 					axios.get('/api/beers').then(response => this.beers = response.data.data);
 				},
 
-				async loadPubsNear() {		
-					await axios.get('/api/pubs/pubsnear', {
+				loadPubsNear() {		
+					axios.get('/api/pubs/pubsnear', {
 						params: {
 							lat: Number(localStorage.getItem('lat')),
 							long: Number(localStorage.getItem('long'))
@@ -94,15 +91,15 @@
 			},
 
 			watch: {
-				'pubs' : function(){
-					this.loadPubsNear();
+				pubs : function(){
+					
 				}
 			},
 
 			mounted() {
 				this.loadPubs();
 				this.loadBeers();
-				//this.loadPubsNear();
+		
 
 
 

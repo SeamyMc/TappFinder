@@ -45,6 +45,7 @@ class PubController extends Controller
      */
     public function store(Request $request)
     {
+        $coords = $this->getCoords($request->postcode);
         $pub = Pub::firstOrCreate(
             ['name' => $request->name],
             ['chain' => $request->chain,
@@ -52,9 +53,13 @@ class PubController extends Controller
              'add1' => $request->add1,
              'add2' => $request->add2,
              'postcode' => $request->postcode,
-             'city' => $request->city, 
+             'city' => $request->city,
+             'lat' => $coords[0],
+             'long' => $coords[1],
              'image'=>$request->image]
         );
+
+        return redirect()->route('pub.show', ['pub' => $pub->id]);
     }
 
     public function getServedBeers()
@@ -88,7 +93,6 @@ class PubController extends Controller
     }
 
     public function getPubsNear(Request $request){
-        $location = ["latitude" => $request->lat, "longitude" => $request->long];
         $pubs = Pub::forPubsNear($request->lat, $request->long)->get();
 
         return $pubs;

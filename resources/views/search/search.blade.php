@@ -1,9 +1,9 @@
 @extends('layouts.main')
 @section('content')
-<<<<<<< Updated upstream
+
 	@include('widgets.searchbar')
 	@include('widgets.search-results')
-=======
+
 	<span id ="app-container">
 		@include('widgets.dynamic-searchbar')
 		@include('widgets.search-results')
@@ -61,11 +61,11 @@
 			document.getElementById('lat').value = localStorage.getItem("lat");
 			document.getElementById('long').value = localStorage.getItem("long");
 			axios.get("/api/beers").then(response => this.beers = response.data.data);
+
 		}
   
 })
 </script>
 
->>>>>>> Stashed changes
 @endsection
 
