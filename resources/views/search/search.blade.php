@@ -1,5 +1,9 @@
 @extends('layouts.main')
 @section('content')
+
+	@include('widgets.searchbar')
+	@include('widgets.search-results')
+
 	<span id ="app-container">
 		@include('widgets.dynamic-searchbar')
 		@include('widgets.search-results')
@@ -12,22 +16,22 @@
 		data() {
 			return{
 				beers: [
-					{name: 'Guinness'},
-					{name: 'Smithwicks'},
-					{name: 'Punk IPA'},
-					{name: 'Hop House 13'},
-					{name: 'Hells Lager'},
-					{name: 'San Miguel'},
-					{name: 'Tennents'},
-					{name: 'Harp'},
-					{name: 'Estrella'},
-					{name: 'Birra Moretti'},
-					{name: 'Elvis Juice'},
-					{name: 'Gamma Ray'},
-					{name: 'Brains Bitter'},
-					{name: 'Brains SA Gold'},
-					{name: 'Brains Black'},
-					{name: 'Brains Smooth'}
+					// {name: 'Guinness'},
+					// {name: 'Smithwicks'},
+					// {name: 'Punk IPA'},
+					// {name: 'Hop House 13'},
+					// {name: 'Hells Lager'},
+					// {name: 'San Miguel'},
+					// {name: 'Tennents'},
+					// {name: 'Harp'},
+					// {name: 'Estrella'},
+					// {name: 'Birra Moretti'},
+					// {name: 'Elvis Juice'},
+					// {name: 'Gamma Ray'},
+					// {name: 'Brains Bitter'},
+					// {name: 'Brains SA Gold'},
+					// {name: 'Brains Black'},
+					// {name: 'Brains Smooth'}
 				],
 
 				matchedBeers: [
@@ -56,7 +60,8 @@
 		mounted() {
 			document.getElementById('lat').value = localStorage.getItem("lat");
 			document.getElementById('long').value = localStorage.getItem("long");
-			axios.get("/beers").then(response => this.beers = response.data);
+			axios.get("/api/beers").then(response => this.beers = response.data.data);
+
 		}
   
 })
