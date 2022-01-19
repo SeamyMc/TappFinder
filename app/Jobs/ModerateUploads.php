@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Pint;
+use Illuminate\Support\Facades\Log;
 
 class ModerateUploads implements ShouldQueue
 {
@@ -35,7 +36,6 @@ class ModerateUploads implements ShouldQueue
      */
     public function handle()
     {
-        echo($pint->beer->name);
-        echo($pint->user->name);
+        Log::info("Adding to moderation queue: " . $pint->beer->name);
     }
 }
