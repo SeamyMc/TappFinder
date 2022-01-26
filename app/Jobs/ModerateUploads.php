@@ -12,6 +12,9 @@ use App\Models\Pint;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 
+use App\Services\SMS\Messager;
+use App\Services\SMS\SMSGlobalMessager;
+
 
 class ModerateUploads implements ShouldQueue
 {
@@ -36,25 +39,21 @@ class ModerateUploads implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(Messager $sender)
     {
+
         Log::info("Adding to moderation queue: " . $this->pint->price);
+        $sender->send('07799474101', $this->getMessage());
+
+
         //Some code to send text
-    
-        $api_key = 'H334DXcT6sOp2QLggxMYJU6XpwI5dTMkNGeQd7jaqzGiFR';
 
-        $response = Http::withHeaders([
-            'Authorization' => 'H334DXcT6sOp2QLggxMYJU6XpwI5dTMkNGeQd7jaqzGiFR'
-        ])->post('https://api.voodoosms.com/sendsms', [
-            'to' => 447799474101,
-            'from' => "VoodooSMS",
-            'msg' => "Hello User! t",
-            'sandbox' => true
-        ]);
+    }
 
-        
-        Log::info($response);
 
+    private function getMessage()
+    {
+        return "New item for review!";
 
     }
         

@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Services\SMS\SMSGlobalMessager;
+use App\Services\SMS\Messager;
+use App\Services\SMS\VoodooMessager;
+
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +17,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(Messager::class, SMSGlobalMessager::class);
+
     }
 
     /**

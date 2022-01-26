@@ -1,9 +1,6 @@
 @extends('layouts.main')
 @section('content')
 
-	@include('widgets.searchbar')
-	@include('widgets.search-results')
-
 	<span id ="app-container">
 		@include('widgets.dynamic-searchbar')
 		@include('widgets.search-results')

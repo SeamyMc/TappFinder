@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Pint;
 use App\Jobs\ModerateUploads;
+use Illuminate\Support\Facades\Log;
 
 class PintObserver
 {
@@ -15,6 +16,7 @@ class PintObserver
      */
     public function created(Pint $pint)
     {
+        Log::info("test");
         ModerateUploads::dispatch($pint);
     }
 
